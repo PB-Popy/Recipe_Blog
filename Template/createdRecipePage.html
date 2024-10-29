@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1>Jobs Created by  {{request.user.username}}</h1>
+
+<table id="customers">
+  <tr>
+    <th>Category</th>
+    <th>difficulty</th>
+    <th>tag</th>
+    <th>title</th>
+    <th>ingredients</th>
+    <th>instructions</th>
+    <th>prep_time</th>
+    <th>cooking_time</th>
+    <th>total_time</th>
+    <th>nutrition</th>
+    <th>image</th>
+    <th>calories</th>
+    <th>Actions</th>
+  </tr>
+
+  
+  {% for i in recipe %}
+    
+  
+    
+  <tr>
+    <td>{{i.Category}}</td>
+    <td>{{i.difficulty}}</td>
+    <td>{{i.tag}}</td>
+    <td>{{i.title}}</td>
+    <td>{{i.ingredients}}</td>
+    <td>{{i.instructions}}</td>
+    <td>{{i.prep_time}}</td>
+    <td>{{i.cooking_time}}</td>
+    <td>{{i.total_time}}</td>
+    <td>{{i.nutrition}}</td>
+    <td>
+        <img src="/{{i.image}}" height="100 px" alt="">
+    </td>
+    <td>{{i.calories}}</td>
+    
+    <td>
+        <a href="{% url 'deleteRecioe' i.id %}">Delete</a>
+        <a href="{% url 'viewRecipe' i.id %}">View</a>
+        <a href="{% url 'editRecipe' i.id %}">Edit</a>
+        
+        
+    </td>
+  </tr>
+
+  {% endfor %}
+
+</table>
+
+</body>
+</html>
+
+
+
+
+{% endblock body %}
+    
